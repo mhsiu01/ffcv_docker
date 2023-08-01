@@ -16,6 +16,17 @@ jobs:
       packages: write
  
     steps:
+    # Attempt to increase build space.
+    # https://github.com/orgs/community/discussions/26357
+      - name: Patch Docker Daemon data-root
+        run: |
+          DOCKER_DATA_ROOT='/mnt/var/lib/docker'
+          DOCKER_DAEMON_JSON='/etc/docker/daemon.json'
+          sudo mkdir -p "${DOCKER_DATA_ROOT}"
+          jq --arg dataroot "${DOCKER_DATA_ROOT}" '. + {"data-root": $dataroot}' "${DOCKER_DAEMON_JSON}" > "/tmp/docker.json.tmp"
+          sudo mv "/tmp/docker.json.tmp" "${DOCKER_DAEMON_JSON}"
+          sudo systemctl restart docker
+    
       - name: Checkout notebook
         uses: actions/checkout@v3
  
