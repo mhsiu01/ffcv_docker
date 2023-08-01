@@ -18,9 +18,9 @@ jobs:
     steps:
       # https://stackoverflow.com/questions/75536771/github-runner-out-of-disk-space-after-building-docker-image
       - name: Remove unnecessary files
-          run: |
-            sudo rm -rf /usr/share/dotnet
-            sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+        run: |
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
 #     # Attempt to increase build space.
 #     # https://github.com/orgs/community/discussions/26357
 #       - name: Patch Docker Daemon data-root
