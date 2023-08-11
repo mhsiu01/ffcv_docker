@@ -15,6 +15,8 @@ USER root
 
 RUN apt update
 RUN apt-get -y install htop pkg-config libturbojpeg0-dev libopencv-dev
+# for visualizing model intermediate steps:
+RUN apt install python-pydot python-pydot-ng graphviz
 RUN conda clean -tipy
 RUN pip install --no-cache-dir ffcv
 
